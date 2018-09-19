@@ -9,7 +9,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const baseWebpackConfig = require('./webpack.base.conf');
 
-module.exports = merge(baseWebpackConfig, {
+const webpackConfig  = merge(baseWebpackConfig, {
   mode: 'production',
   module: {
     rules: [
@@ -100,9 +100,9 @@ module.exports = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../static'),
         to: 'static',
-        ignore: ['.*']
-      }
-    ])
+        ignore: ['.*'],
+      },
+    ]),
   ],
   optimization: {
     concatenateModules: true,
@@ -130,3 +130,11 @@ module.exports = merge(baseWebpackConfig, {
     ],
   },
 });
+
+// npm run build --report
+if (process.env.npm_config_report) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin());
+}
+
+module.exports = webpackConfig;

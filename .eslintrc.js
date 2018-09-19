@@ -18,6 +18,9 @@ module.exports = {
   ],
   // check if imports actually resolve
   settings: {
+    react: {
+      version: '16.5.1',
+    },
     'import/resolver': {
       webpack: {
         config: 'build/webpack.base.conf.js'
