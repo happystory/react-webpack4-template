@@ -15,7 +15,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
     alias: {
       '@': resolve('src'),
     }
