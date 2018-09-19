@@ -71,12 +71,9 @@ const webpackConfig  = merge(baseWebpackConfig, {
     new CleanWebpackPlugin(['dist'], {
       root: path.resolve(__dirname, '../'),
     }),
-    // extract css into its own file
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[chunkhash].css',
     }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({}),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../dist/index.html'),
@@ -86,16 +83,11 @@ const webpackConfig  = merge(baseWebpackConfig, {
         removeComments: true,
         collapseWhitespace: true,
         removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
       },
-      // necessary to consistently work with multiple chunks
       chunksSortMode: 'dependency'
     }),
-    // keep module.id stable when vendor modules does not change
     new webpack.NamedChunksPlugin(),
     new webpack.HashedModuleIdsPlugin(),
-    // copy custom static assets
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
@@ -131,7 +123,6 @@ const webpackConfig  = merge(baseWebpackConfig, {
   },
 });
 
-// npm run build --report
 if (process.env.npm_config_report) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
   webpackConfig.plugins.push(new BundleAnalyzerPlugin());

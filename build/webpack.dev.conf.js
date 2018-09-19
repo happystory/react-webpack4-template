@@ -57,9 +57,7 @@ module.exports = merge(baseWebpackConfig, {
       },
     ]
   },
-  // cheap-module-eval-source-map is faster for development
   devtool: '#source-map',
-  // these devServer options should be customized in /config/index.js
   devServer: {
     clientLogLevel: 'warning',
     historyApiFallback: {
@@ -68,7 +66,7 @@ module.exports = merge(baseWebpackConfig, {
       ],
     },
     hot: true,
-    contentBase: false, // since we use CopyWebpackPlugin.
+    contentBase: false,
     compress: true,
     host: HOST,
     port: PORT,
@@ -76,7 +74,7 @@ module.exports = merge(baseWebpackConfig, {
     overlay: { warnings: false, errors: true },
     publicPath: '/',
     proxy: {},
-    quiet: true, // necessary for FriendlyErrorsPlugin
+    quiet: true,
     watchOptions: {
       poll: false,
     }
@@ -93,7 +91,6 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
-    // copy custom static assets
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
@@ -105,12 +102,7 @@ module.exports = merge(baseWebpackConfig, {
       compilationSuccessInfo: {
         messages: [`Your application is running here: http://${HOST}:${PORT}`],
       },
-      onErrors: function (severity, errors) {
-        // You can listen to errors transformed and prioritized by the plugin
-        // severity can be 'error' or 'warning'
-      },
-      // should the console be cleared between each compilation?
-      // default is true
+      onErrors: undefined,
       clearConsole: true,
     }),
   ],
