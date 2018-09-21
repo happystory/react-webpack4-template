@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git@github.com:happystory/react-webpack4-template.git"
   },
-  "author": "",
+  "author": "liuyao",
   "license": "ISC",
   "dependencies": {
     "prop-types": "15.6.2",
