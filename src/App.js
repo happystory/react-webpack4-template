@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {
-  HashRouter, Route, NavLink, Switch,
+  HashRouter, NavLink, Switch,
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
-import Home from './views/home';
-import About from './views/about';
+import Routes from './config/router';
 import './App.scss';
 
 class App extends Component {
@@ -19,8 +18,7 @@ class App extends Component {
           </div>
 
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
+            <Routes />
           </Switch>
         </>
       </HashRouter>
