@@ -77,7 +77,7 @@ const webpackConfig  = merge(baseWebpackConfig, {
     new OptimizeCSSPlugin({}),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../dist/index.html'),
-      template: 'index.html',
+      template: path.resolve(__dirname, '../public/index.html'),
       inject: true,
       minify: {
         removeComments: true,
@@ -90,9 +90,9 @@ const webpackConfig  = merge(baseWebpackConfig, {
     new webpack.HashedModuleIdsPlugin(),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
-        to: 'static',
-        ignore: ['.*'],
+        from: path.resolve(__dirname, '../public'),
+        to: '',
+        ignore: ['.*', 'index.html'],
       },
     ]),
   ],

@@ -88,14 +88,14 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
+      template: path.resolve(__dirname, '../public/index.html'),
       inject: true
     }),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
-        to: 'static',
-        ignore: ['.*']
+        from: path.resolve(__dirname, '../public'),
+        to: '',
+        ignore: ['.*', 'index.html']
       }
     ]),
     new FriendlyErrorsPlugin({
