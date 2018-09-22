@@ -24,6 +24,7 @@ module.exports = {
   ],
   rules: {
     'class-methods-use-this': 0,
-    'react/jsx-no-target-blank': 0
+    'react/jsx-no-target-blank': 0,
+    'no-console': 0,
   }
 };

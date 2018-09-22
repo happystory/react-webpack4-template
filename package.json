@@ -16,6 +16,8 @@
   "author": "liuyao",
   "license": "ISC",
   "dependencies": {
+    "mobx": "5.1.2",
+    "mobx-react": "5.2.8",
     "prop-types": "15.6.2",
     "react": "16.5.2",
     "react-dom": "16.5.2",
