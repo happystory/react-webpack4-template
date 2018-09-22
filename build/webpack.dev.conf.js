@@ -102,7 +102,7 @@ const devWebpackConfig =  merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../public'),
         to: '',
-        ignore: ['.*', 'index.html']
+        ignore: ['index.html']
       }
     ]),
   ],
