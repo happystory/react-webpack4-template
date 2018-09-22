@@ -115,27 +115,26 @@ const devWebpackConfig =  merge(baseWebpackConfig, {
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = PORT;
-  portfinder.getPort((err, port) => {
-    if (err) {
+  portfinder.getPortPromise().then((port) => {
+    devWebpackConfig.devServer.port = port;
+
+    lookup(os.hostname()).then(res => {
+      const ip = res.address;
+
+      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
+        compilationSuccessInfo: {
+          messages: [chalk`App running at:\n  - Local:   {cyan http://localhost:{bold ${port}/}}\n  - Network: {cyan http://${ip}:{bold ${port}/}}`],
+        },
+        onErrors: undefined,
+        clearConsole: true,
+      }));
+
+      resolve(devWebpackConfig);
+    }).catch(err => {
       reject(err);
-    } else {
-      devWebpackConfig.devServer.port = port;
-
-      lookup(os.hostname()).then(res => {
-        const ip = res.address;
-
-        devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
-          compilationSuccessInfo: {
-            messages: [chalk`App running at:\n  - Local:   {cyan http://localhost:{bold ${port}/}}\n  - Network: {cyan http://${ip}:{bold ${port}/}}`],
-          },
-          onErrors: undefined,
-          clearConsole: true,
-        }));
-
-        resolve(devWebpackConfig);
-      }).catch(err => {
-        reject(err);
-      });
-    }
+    });
   })
-})
+  .catch((err) => {
+    reject(err);
+  });
+});
