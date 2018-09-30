@@ -64,7 +64,7 @@ const webpackConfig  = merge(baseWebpackConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        BASE_URL: '"http://www.example.com/"'
+        // define your global vars here
       }
     }),
     new MiniCssExtractPlugin({

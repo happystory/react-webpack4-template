@@ -89,7 +89,7 @@ const devWebpackConfig =  merge(baseWebpackConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        BASE_URL: '"http://www.test.com/"'
+        // define your global vars here
       }
     }),
     new webpack.HotModuleReplacementPlugin(),
