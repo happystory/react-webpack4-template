@@ -96,7 +96,8 @@ const devWebpackConfig =  merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, '../public/index.html'),
-      inject: true
+      inject: true,
+      baseUrl: '/',
     }),
     new CopyWebpackPlugin([
       {
@@ -118,7 +119,7 @@ module.exports = new Promise((resolve, reject) => {
   portfinder.getPortPromise().then((port) => {
     devWebpackConfig.devServer.port = port;
 
-    lookup(os.hostname()).then(res => {
+    lookup(os.hostname()).then((res) => {
       const ip = res.address;
 
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
@@ -130,7 +131,7 @@ module.exports = new Promise((resolve, reject) => {
       }));
 
       resolve(devWebpackConfig);
-    }).catch(err => {
+    }).catch((err) => {
       reject(err);
     });
   })

@@ -87,7 +87,8 @@ const webpackConfig  = merge(baseWebpackConfig, {
         minifyCSS: true,
         minifyURLs: true,
       },
-      chunksSortMode: 'dependency'
+      chunksSortMode: 'dependency',
+      baseUrl: '/',
     }),
     new webpack.NamedChunksPlugin(),
     new webpack.HashedModuleIdsPlugin(),
