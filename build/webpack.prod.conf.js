@@ -6,8 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const baseWebpackConfig = require('./webpack.base.conf');
 
 const webpackConfig  = merge(baseWebpackConfig, {
@@ -69,9 +67,6 @@ const webpackConfig  = merge(baseWebpackConfig, {
         BASE_URL: '"http://www.example.com/"'
       }
     }),
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '../'),
-    }),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[chunkhash].css',
     }),
@@ -103,7 +98,6 @@ const webpackConfig  = merge(baseWebpackConfig, {
         ignore: ['index.html'],
       },
     ]),
-    new ProgressBarPlugin(),
   ],
   optimization: {
     concatenateModules: true,

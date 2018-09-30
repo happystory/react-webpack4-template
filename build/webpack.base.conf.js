@@ -1,7 +1,7 @@
 const path = require('path');
 
 function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+  return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
@@ -35,7 +35,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src')]
+        include: [resolve('src')],
+        options: {
+          cacheDirectory: true,
+        },
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
