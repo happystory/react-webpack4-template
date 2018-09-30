@@ -60,7 +60,7 @@ const webpackConfig  = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'static/js/[name].[chunkhash].js',
-    publicPath: '/public/',
+    publicPath: '/',
   },
   plugins: [
     new webpack.DefinePlugin({
