@@ -60,6 +60,7 @@ const webpackConfig  = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'static/js/[name].[chunkhash].js',
+    publicPath: '/public/',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -88,7 +89,6 @@ const webpackConfig  = merge(baseWebpackConfig, {
         minifyURLs: true,
       },
       chunksSortMode: 'dependency',
-      baseUrl: '/',
     }),
     new webpack.NamedChunksPlugin(),
     new webpack.HashedModuleIdsPlugin(),

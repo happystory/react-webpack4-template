@@ -97,7 +97,6 @@ const devWebpackConfig =  merge(baseWebpackConfig, {
       filename: 'index.html',
       template: path.resolve(__dirname, '../public/index.html'),
       inject: true,
-      baseUrl: '/',
     }),
     new CopyWebpackPlugin([
       {
