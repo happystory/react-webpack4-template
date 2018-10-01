@@ -11,58 +11,46 @@ const portfinder = require('portfinder');
 const chalk = require('chalk');
 const baseWebpackConfig = require('./webpack.base.conf');
 
-const lookup = promisify(dns.lookup);
-
 const HOST = '0.0.0.0';
 const PORT = (process.env.PORT && Number(process.env.PORT)) || 8080;
 
-const devWebpackConfig =  merge(baseWebpackConfig, {
+const baseCssRules = [
+  'style-loader',
+  {
+    loader: 'css-loader',
+    options: {
+      sourceMap: true,
+    },
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: true,
+    },
+  },
+];
+
+const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          }
-        ]
+        use: baseCssRules,
       },
       {
         test: /\.scss/,
         use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
-          },
+          ...baseCssRules,
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
-            }
-          }
-        ]
+              sourceMap: true,
+            },
+          },
+        ],
       },
-    ]
+    ],
   },
   devtool: '#source-map',
   devServer: {
@@ -84,7 +72,7 @@ const devWebpackConfig =  merge(baseWebpackConfig, {
     quiet: true,
     watchOptions: {
       poll: false,
-    }
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -105,8 +93,8 @@ const devWebpackConfig =  merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../public'),
         to: '',
-        ignore: ['index.html']
-      }
+        ignore: ['index.html'],
+      },
     ]),
   ],
   optimization: {
@@ -121,7 +109,7 @@ module.exports = new Promise((resolve, reject) => {
   portfinder.getPortPromise().then((port) => {
     devWebpackConfig.devServer.port = port;
 
-    lookup(os.hostname()).then((res) => {
+    promisify(dns.lookup)(os.hostname()).then((res) => {
       const ip = res.address;
 
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
@@ -137,7 +125,7 @@ module.exports = new Promise((resolve, reject) => {
       reject(err);
     });
   })
-  .catch((err) => {
-    reject(err);
-  });
+    .catch((err) => {
+      reject(err);
+    });
 });
