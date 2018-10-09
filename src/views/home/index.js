@@ -13,7 +13,8 @@ const propTypes = {
   appState: PropTypes.instanceOf(AppState),
 };
 
-@inject('appState') @observer
+@inject('appState')
+@observer
 class Home extends Component {
   constructor(props) {
     super(props);

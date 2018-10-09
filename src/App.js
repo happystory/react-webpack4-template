@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import Routes from './config/router';
-import './App.scss';
 
 class App extends Component {
   render() {
