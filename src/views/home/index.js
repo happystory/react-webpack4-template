@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import {
-  observer,
-  inject,
-} from 'mobx-react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { AppState } from '../../store/app-state';
 import Logo from '../../assets/logo.svg';
 import HelloWorld from '../../components/HelloWorld';
+import { add } from '../../store/actionCreator';
 
-const propTypes = {
-  appState: PropTypes.instanceOf(AppState),
-};
 
-@inject('appState')
-@observer
+@connect(
+  state => ({
+    count: state.count,
+  }),
+  dispatch => ({
+    add() {
+      dispatch(add());
+    },
+  }),
+)
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -22,20 +23,18 @@ class Home extends Component {
   }
 
   handleClick() {
-    this.props.appState.add();
+    this.props.add();
   }
 
   render() {
     return (
       <div className="home">
-        <div onClick={this.handleClick}>{this.props.appState.msg}</div>
+        <div onClick={this.handleClick}>{this.props.count}</div>
         <img alt="Vue logo" src={Logo} width="200" height="200" />
         <HelloWorld msg="Welcome to Your React.js App" />
       </div>
     );
   }
 }
-
-Home.propTypes = propTypes;
 
 export default Home;

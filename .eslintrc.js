@@ -26,5 +26,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'react/jsx-no-target-blank': 0,
     'no-console': 0,
+    'import/prefer-default-export': 0,
+    'react/prop-types': 0,
   }
 };
