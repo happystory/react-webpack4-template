@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Logo from '../../assets/logo.svg';
 import HelloWorld from '../../components/HelloWorld';
-import { add } from '../../store/actionCreator';
+import { ASYNC_ADD } from '../../store/constants';
 
 
 @connect(
@@ -11,8 +11,10 @@ import { add } from '../../store/actionCreator';
     count: state.count,
   }),
   dispatch => ({
-    add() {
-      dispatch(add());
+    add: () => {
+      dispatch({
+        type: ASYNC_ADD,
+      });
     },
   }),
 )
