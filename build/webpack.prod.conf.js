@@ -13,15 +13,15 @@ const baseCssRules = [
   {
     loader: 'css-loader',
     options: {
-      sourceMap: false,
-    },
+      sourceMap: false
+    }
   },
   {
     loader: 'postcss-loader',
     options: {
-      sourceMap: false,
-    },
-  },
+      sourceMap: false
+    }
+  }
 ];
 
 const webpackConfig = merge(baseWebpackConfig, {
@@ -30,7 +30,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.css$/,
-        use: baseCssRules,
+        use: baseCssRules
       },
       {
         test: /\.scss/,
@@ -38,27 +38,28 @@ const webpackConfig = merge(baseWebpackConfig, {
           ...baseCssRules,
           {
             loader: 'sass-loader',
+            implementation: require('sass'),
             options: {
-              sourceMap: false,
-            },
-          },
-        ],
-      },
-    ],
+              sourceMap: false
+            }
+          }
+        ]
+      }
+    ]
   },
   devtool: false,
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'static/js/[name].[chunkhash].js',
+    filename: 'static/js/[name].[chunkhash].js'
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        BASE_URL: '"/"',
-      },
+        BASE_URL: '"/"'
+      }
     }),
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[chunkhash].css',
+      filename: 'static/css/[name].[chunkhash].css'
     }),
     new OptimizeCSSPlugin({}),
     new HtmlWebpackPlugin({
@@ -75,12 +76,12 @@ const webpackConfig = merge(baseWebpackConfig, {
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true,
+        minifyURLs: true
       },
       chunksSortMode: 'dependency',
       templateParameters: {
-        BASE_URL: '/',
-      },
+        BASE_URL: '/'
+      }
     }),
     new webpack.NamedChunksPlugin(),
     new webpack.HashedModuleIdsPlugin(),
@@ -88,9 +89,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../public'),
         to: '',
-        ignore: ['index.html'],
-      },
-    ]),
+        ignore: ['index.html']
+      }
+    ])
   ],
   optimization: {
     splitChunks: {
@@ -99,16 +100,16 @@ const webpackConfig = merge(baseWebpackConfig, {
           name: 'chunk-vendors',
           test: /[\\\/]node_modules[\\\/]/,
           priority: -10,
-          chunks: 'initial',
+          chunks: 'initial'
         },
         common: {
           name: 'chunk-common',
           minChunks: 2,
           priority: -20,
           chunks: 'initial',
-          reuseExistingChunk: true,
-        },
-      },
+          reuseExistingChunk: true
+        }
+      }
     },
     runtimeChunk: 'single',
     minimizer: [
@@ -117,15 +118,15 @@ const webpackConfig = merge(baseWebpackConfig, {
           compress: {
             warnings: false,
             drop_debugger: true,
-            drop_console: true,
-          },
+            drop_console: true
+          }
         },
         sourceMap: false,
         parallel: true,
-        cache: true,
-      }),
-    ],
-  },
+        cache: true
+      })
+    ]
+  }
 });
 
 if (process.env.npm_config_report) {
