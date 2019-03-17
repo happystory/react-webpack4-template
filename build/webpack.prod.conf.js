@@ -38,8 +38,8 @@ const webpackConfig = merge(baseWebpackConfig, {
           ...baseCssRules,
           {
             loader: 'sass-loader',
-            implementation: require('sass'),
             options: {
+              implementation: require('sass'),
               sourceMap: false
             }
           }
