@@ -53,6 +53,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     filename: 'static/js/[name].[chunkhash].js'
   },
   plugins: [
+    new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         BASE_URL: '"/"'
