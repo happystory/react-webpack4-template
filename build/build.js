@@ -1,4 +1,4 @@
-const ora = require('ora');
+// const ora = require('ora');
 const rm = require('rimraf');
 const path = require('path');
 const chalk = require('chalk');
