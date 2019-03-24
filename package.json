@@ -2,7 +2,6 @@
   "name": "react-webpack4-template",
   "version": "1.0.0",
   "description": "react template",
-  "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
