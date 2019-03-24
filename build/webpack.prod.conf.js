@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const baseWebpackConfig = require('./webpack.base.conf');
 
 const baseCssRules = [
@@ -96,35 +96,37 @@ const webpackConfig = merge(baseWebpackConfig, {
   ],
   optimization: {
     splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,  // cra set it as false?
       cacheGroups: {
         vendors: {
-          name: 'chunk-vendors',
-          test: /[\\\/]node_modules[\\\/]/,
-          priority: -10,
-          chunks: 'initial'
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
         },
-        common: {
-          name: 'chunk-common',
+        default: {
           minChunks: 2,
           priority: -20,
-          chunks: 'initial',
           reuseExistingChunk: true
         }
       }
     },
-    runtimeChunk: 'single',
+    runtimeChunk: true,
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false, // Must be set to true if using source-maps in production
+        terserOptions: {
           compress: {
             warnings: false,
-            drop_debugger: true,
             drop_console: true
           }
-        },
-        sourceMap: false,
-        parallel: true,
-        cache: true
+        }
       })
     ]
   }
