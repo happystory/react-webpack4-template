@@ -26,6 +26,9 @@ const baseCssRules = [
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
+  performance: {
+    hints: false
+  },
   module: {
     rules: [
       {
