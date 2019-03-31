@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const baseWebpackConfig = require('./webpack.base.conf');
 
@@ -62,7 +62,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[chunkhash].css'
     }),
-    new OptimizeCSSPlugin({}),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../dist/index.html'),
       template: path.resolve(__dirname, '../public/index.html'),
@@ -127,7 +126,8 @@ const webpackConfig = merge(baseWebpackConfig, {
             drop_console: true
           }
         }
-      })
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ]
   }
 });
